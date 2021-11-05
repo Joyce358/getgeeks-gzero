@@ -47,3 +47,32 @@ Incorrect Email
     Submit Credentials
     Should Be Type Email
 
+# Desafio 1 módulo PRO
+Email Obrigatório
+    [Tags]          desafio_campos
+
+    ${user}         Create Dictionary       email=${empty}        password=pwd123
+
+    Go To Login Page
+    Fill Credentials        ${user}
+    Submit Credentials
+    Alert Span Should Be        E-mail obrigatório
+
+Senha Obrigatória
+    [Tags]          desafio_campos
+
+    ${user}         Create Dictionary       email=papito@hotmail.com        password=${empty}
+
+    Go To Login Page
+    Fill Credentials        ${user}
+    Submit Credentials
+    Alert Span Should Be        Senha obrigatória
+
+Campos Obrigatórios
+    [Tags]          desafio_campos
+
+    Go To Login Page
+    Submit Credentials
+    Alert Span Should Be        E-mail obrigatório
+    Alert Span Should Be        Senha obrigatória
+
