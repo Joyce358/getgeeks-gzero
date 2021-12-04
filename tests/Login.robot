@@ -4,12 +4,13 @@ Documentation           Login Test Suite
 Resource        ${EXECDIR}/resources/Base.robot
 
 Test Setup      Start Session
-Test Teardown   Finish Session
+Test Teardown   After Test
 
 *Test Cases*
 User login
+    [Tags]      smoke
 
-    ${user}                     Factory User Login
+    ${user}                     Factory User    login
     Add User From Database      ${user}
 
     Go To Login Page
@@ -71,8 +72,11 @@ Senha Obrigatória
 Campos Obrigatórios
     [Tags]          desafio_campos
 
+    @{expected_alerts}      Create List
+    ...                     E-mail obrigatório
+    ...                     Senha obrigatória
+
     Go To Login Page
     Submit Credentials
-    Alert Span Should Be        E-mail obrigatório
-    Alert Span Should Be        Senha obrigatória
+    Alert Spans Should Be       ${expected_alerts}
 
